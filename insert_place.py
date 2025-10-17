@@ -1,4 +1,46 @@
-# insert_place.py
+
+import sqlalchemy
+from db_config import connector, engine
+
+def insert_place(name , country , currency , lat , lon , rating_avg , description , vibe , budget , poi):
+    try:
+        with engine.connect() as conn:
+            conn.execute(sqlalchemy.text(
+                "INSERT INTO catalog (name , country , currency , lat , lon , rating_avg , description , vibe , budget , poi) VALUES (:name , :country , :currency , :lat , :lon , :rating_avg , :description , :vibe , :budget , :poi)"
+            ), {"name": name , "country": country , "currency": currency , "lat": lat , "lon": lon , "rating_avg": rating_avg , "description": description , "vibe": vibe , "budget": budget , "poi": poi})
+            conn.commit()
+
+            print("Location inserted successfully.")
+    except Exception as err:
+        print(f"Error: {err}")
+    finally:
+        if connector:
+            connector.close()
+
+if __name__ == "__main__":
+    location_data = {
+        "name": ["New York City", "Seattle", "New York City"],
+        "country": ["USA", "USA", "USA"],
+        "currency": ["USD", "USD", "USD"],
+        "lat": [123243.98983, 65182736.234122, 7361265311.1231231],
+        "lon": [442322334.234221, 488798712.1234234, 99893223.2355213],
+        "rating_avg": [4.3, 3.5, 4.6],
+        "description": ["Lively place", "Good place", "Awesome place"],
+        "vibe": ["Good", "Bad", "Bad"],
+        "budget": ["$200", "$200", "$200"],
+        "poi": ["Times Square", "Space Needle", "Central Park"]
+    }
+
+    for i in range(3):
+        insert_place(location_data["name"][i], location_data["country"][i], location_data["currency"][i],
+                     location_data["lat"][i], location_data["lon"][i], location_data["rating_avg"][i],
+                     location_data["description"][i], location_data["vibe"][i], location_data["budget"][i],
+                     location_data["poi"][i])
+
+
+
+'''AWS VM
+
 from db_config import get_connection
 
 def insert_place(name , country , currency , lat , lon , rating_avg , description , vibe , budget , poi):
@@ -47,3 +89,5 @@ if __name__ == "__main__":
 
     for i in range(3):
         insert_place(location_data["name"][i] , location_data["country"][i] , location_data["currency"][i] , location_data["lat"][i] , location_data["lon"][i] , location_data["rating_avg"][i] , location_data["description"][i] , location_data["vibe"][i] , location_data["budget"][i] , location_data["poi"][i])
+'''
+

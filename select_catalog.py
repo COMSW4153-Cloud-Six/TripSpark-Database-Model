@@ -1,4 +1,28 @@
-# select_catalog.py
+
+import sqlalchemy
+from db_config import connector, engine
+
+def fetch_places():
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(sqlalchemy.text("SELECT * FROM catalog"))
+            rows = result.fetchall()
+
+            print("\nLocations in catalogs:")
+            for row in rows:
+                print(row)
+    except Exception as err:
+        print(f"Error: {err}")
+    finally:
+        if connector:
+            connector.close()
+
+if __name__ == "__main__":
+    fetch_places()
+
+
+''' AWS VM
+
 from db_config import get_connection
 
 def fetch_places():
@@ -35,3 +59,5 @@ def fetch_places():
 
 if __name__ == "__main__":
     fetch_places()
+'''
+
