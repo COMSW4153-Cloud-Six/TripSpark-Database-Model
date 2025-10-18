@@ -1,4 +1,1 @@
 mysql-connector-python
-sqlalchemy
-cloud-sql-python-connector[mysql]
-PyMySQL
