@@ -2,7 +2,7 @@
 import mysql.connector
 
 DB_CONFIG = {
-    'host': '34.139.223.61',
+    'host': '10.142.0.4',
     'user': 'felicia',
     'password': '1234',
     'database': 'TripSparkCatalog'
