@@ -39,24 +39,15 @@ def create_table():
             spending ENUM('low', 'medium', 'high'),
             budget INT,
 
-            vibes SET(
-                '','relaxed', 'adventure', 'cultural', 'nightlife',
-                'nature', 'urban', 'historic', 'modern'
-            ),
-            activities SET(
-                '','museums', 'shopping', 'parks', 'architecture',
-                'live music', 'sports', 'photography', 'walking tours'
-            ),
-            food SET(
-                '','coffee', 'fine dining', 'street food', 'vegetarian',
-                'seafood', 'local cuisine', 'bakeries', 'brunch'
-            ),
+            vibes TEXT,
+            activities TEXT,
+            food TEXT,
 
-            best_season ENUM('','spring', 'summer', 'fall', 'winter'),
+            best_season ENUM('spring', 'summer', 'fall', 'winter'),
             trip_days INT,
             nearest_airport VARCHAR(100),
 
-            transport ENUM('','walkable', 'public_transit', 'rideshare', 'car_rental'),
+            transport ENUM('walkable', 'public_transit', 'rideshare', 'car_rental'),
 
             accessibility TEXT,
             direction VARCHAR(500)
